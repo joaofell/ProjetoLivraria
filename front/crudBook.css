@@ -1,0 +1,28 @@
+.table-responsive{
+    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-width: 3px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.278);
+    
+}
+.section1{
+    display: flex;
+}
+.section2{
+    display: flex;
+}
+#button{
+    text-align: right;
+    margin-right: 125px;
+    margin-top: 30px;
+}
+table{
+    margin:10px;
+}
+th{
+    padding-left: 20px;
+    padding-right: 80px;
+}
