@@ -13,8 +13,8 @@ const loadTableBook = () => {
                     trHTML += '<td>' + element.author + '</td>';
                     trHTML += '<td>' + element.publication_year + '</td>';
                     trHTML += '<td>' + element.pages + '</td>';
-                    trHTML += '<td>' + element.CategoryId + '</td>';
-                    trHTML += '<td>' + element.PublisherId + '</td>';
+                    trHTML += '<td>' + element.Category.description + '</td>';
+                    trHTML += '<td>' + element.Publisher.name + '</td>';
                     trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showBookEditBox(' + element.id + ')">Edit</button>';
                     trHTML += '<button type="button" class="btn btn-outline-danger" onclick="bookDelete(' + element.id + ')">Del</button></td>';
                     trHTML += "</tr>";
@@ -26,7 +26,9 @@ const loadTableBook = () => {
 
 loadTableBook();
 
-const showBookCreateBox = () => {
+const showBookCreateBox = async () => {
+    const categories = await showCategoryCreateCombo();
+    const publishers = await showPublishCreateCombo();
     Swal.fire({
         title: 'Create user',
         html:
@@ -35,8 +37,8 @@ const showBookCreateBox = () => {
             '<input id="author" class="swal2-input" placeholder="author">' +
             '<input id="publication_year" class="swal2-input" placeholder="publication_year">' +
             '<input id="pages" class="swal2-input" placeholder="pages">' +
-            '<input id="CategoryId" class="swal2-input" placeholder="CategoryId">' +
-            '<input id="PublisherId" class="swal2-input" placeholder="PublisherId">',
+            categories +
+            publishers,
         focusConfirm: false,
         showCancelButton: true,
         preConfirm: () => {
@@ -50,8 +52,10 @@ const bookCreate = () => {
     const author = document.getElementById("author").value;
     const publication_year = document.getElementById("publication_year").value;
     const pages = document.getElementById("pages").value;
-    const CategoryId = document.getElementById("CategoryId").value;
-    const PublisherId = document.getElementById("PublisherId").value;
+    var select = document.getElementById('Select1');
+	var CategoryId = select.options[select.selectedIndex].value;
+    var select = document.getElementById('Select2');
+	var PublisherId = select.options[select.selectedIndex].value;
 
     axios.post(`${ENDPOINT}/books`, {
         title: title,
@@ -93,6 +97,8 @@ const bookDelete = async (id) => {
 const showBookEditBox = async (id) => {
     const user = await getBooks(id);
     const data = user.data;
+    const categories = await showCategoryCreateCombo();
+    const publishers = await showPublishCreateCombo();
     Swal.fire({
         title: 'Edit Book',
         html:
@@ -101,8 +107,8 @@ const showBookEditBox = async (id) => {
         '<input id="author" class="swal2-input" placeholder="author" value="' + data.author + '">' +
         '<input id="publication_year" class="swal2-input" placeholder="publication_year" value="' + data.publication_year + '">' +
         '<input id="pages" class="swal2-input" placeholder="pages" value="' + data.pages + '">' + 
-        '<input id="CategoryId" class="swal2-input" placeholder="CategoryId" value="' + data.CategoryId + '">'+
-        '<input id="PublisherId" class="swal2-input" placeholder="PublisherId" value="' + data.PublisherId + '">',
+        categories+
+        publishers,
         focusConfirm: false,
         showCancelButton: true,
         preConfirm: () => {
@@ -117,8 +123,10 @@ const bookEdit = () => {
     const author = document.getElementById("author").value;
     const publication_year = document.getElementById("publication_year").value;
     const pages = document.getElementById("pages").value;
-    const CategoryId = document.getElementById("CategoryId").value;
-    const PublisherId = document.getElementById("PublisherId").value;
+    var select = document.getElementById('Select1');
+	var CategoryId = select.options[select.selectedIndex].value;
+    var select = document.getElementById('Select2');
+	var PublisherId = select.options[select.selectedIndex].value;
 
     axios.put(`${ENDPOINT}/books/` + id, {
         title: title,
@@ -139,4 +147,32 @@ const bookEdit = () => {
         });
 }
 
+const getCategory = () => {
+    return axios.get(`${ENDPOINT}/categories/`);
+}
 
+const showCategoryCreateCombo = async (id) => {
+const categories = await getCategory();
+const data = categories.data;
+var select = '<select class="swal2-input" id="Select1">'
+data.forEach((element) => {
+    select += `<option value='${element.id}'>'${element.description}'</option>` 
+})
+select += '</select>'
+return select;
+}
+
+const getpublisher = () => {
+    return axios.get(`${ENDPOINT}/publishers/`);
+}
+
+const showPublishCreateCombo = async (id) => {
+const publishers = await getpublisher();
+const data = publishers.data;
+var select = '<select class="swal2-input" id="Select2">'
+data.forEach((element) => {
+    select += `<option value='${element.id}'>'${element.name}'</option>` 
+})
+select += '</select>'
+return select;
+}

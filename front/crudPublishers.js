@@ -6,12 +6,13 @@ const loadTablePublisher = () => {
             if (response.status === 200) {
                 const data = response.data;
                 var trHTML = '';
+                console.log(data)
                 data.forEach(element => {
                     trHTML += '<tr>';
                     trHTML += '<td>' + element.id + '</td>';
                     trHTML += '<td>' + element.name + '</td>';
-                    trHTML += '<td>' + element.CityId + '</td>';
-                    trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="publisherEdit(' + element.id + ')">Edit</button>';
+                    trHTML += '<td>' + element.City.name + '</td>';
+                    trHTML += '<td><button type="button" class="btn btn-outline-secondary" onclick="showPublisherEditBox(' + element.id + ')">Edit</button>';
                     trHTML += '<button type="button" class="btn btn-outline-danger" onclick="publishDelete(' + element.id + ')">Del</button></td>';
                     trHTML += "</tr>";
                 });
@@ -23,13 +24,14 @@ const loadTablePublisher = () => {
 loadTablePublisher();
 
 
-const showPublisherCreateBox = () => {
+const showPublisherCreateBox = async () => {
+    const city = await showCityCreateCombo();
     Swal.fire({
         title: 'Create publisher',
         html:
             '<input id="id" type="hidden">' +
             '<input id="name" class="swal2-input" placeholder="name">'+
-            '<input id="CityId" class="swal2-input" placeholder="CityId">',
+            city,
         focusConfirm: false,
         showCancelButton: true,
         preConfirm: () => {
@@ -40,7 +42,8 @@ const showPublisherCreateBox = () => {
 
 const publisherCreate = () => {
     const name = document.getElementById("name").value;
-    const CityId = document.getElementById("CityId").value;
+    var select = document.getElementById('Select');
+	var CityId = select.options[select.selectedIndex].value;
 
     axios.post(`${ENDPOINT}/publishers`, {
         name: name,
@@ -58,8 +61,22 @@ const publisherCreate = () => {
         });
 }
 
+const getCity = () => {
+    return axios.get(`${ENDPOINT}/cities/`);
+}
+const showCityCreateCombo = async (id) => {
+    const states = await getCity();
+    const data = states.data;
+    var select = '<select class="swal2-input" id="Select">'
+    data.forEach((element) => {
+        select += `<option value='${element.id}'>'${element.name}'</option>` 
+    })
+    select += '</select>'
+    return select;
+    }
+
 const getPublisher = (id) => {
-    return axios.get(`${ENDPOINT}/publishers/` + id);
+    return axios.get(`${ENDPOINT}/publishers/`+ id);
 }
 
 const showPublisherEditBox = async (id) => {
@@ -103,12 +120,12 @@ const publishDelete = async (id) => {
     const user = await getPublisher(id);
     const data = user.data;
     axios.delete(`${ENDPOINT}/publishers/` + id)
-    .then((response) => {
-        Swal.fire(`Publisher ${data.name} deleted`);
-        loadTablePublisher();
-    }, (error) => {
-        Swal.fire(`Error to delete publisher: ${error.response.data.error} `);
-        loadTablePublisher();
+        .then((response) => {
+            Swal.fire(`Publisher ${data.name} deleted`);
+            loadTablePublisher();
+        }, (error) => {
+            Swal.fire(`Error to delete publisher: ${error.response.data.error} `);
+            loadTablePublisher();
     });
 };
 

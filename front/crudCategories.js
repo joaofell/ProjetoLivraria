@@ -52,12 +52,12 @@ const categoryCreate = () => {
         });
 }
 
-const getCategory = (id) => {
+const getCategories = (id) => {
     return axios.get(`${ENDPOINT}/categories/` + id);
 }
 
 const categoryDelete = async (id) => {
-    const user = await getCategory(id);
+    const user = await getCategories(id);
     const data = user.data;
     axios.delete(`${ENDPOINT}/categories/` + id)
     .then((response) => {
