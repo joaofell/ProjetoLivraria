@@ -1,3 +1,4 @@
+const ENDPOINT = "http://localhost:3000";
 
 const loadTableCities = () => {
     axios.get(`${ENDPOINT}/cities`)

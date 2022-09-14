@@ -37,7 +37,7 @@ update = async (req,res,next) => {
     try {
         const id = req.params.cityId;
         const data = await this.validateData(req.body, id);
-        await StateModel.update(data, {
+        await CityModel.update(data, {
           where: {
             id:id
           }

@@ -1,0 +1,77 @@
+<!doctype html>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CRUD</title>
+    <link href="css/crudBook.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="js/crudBooks.js" rel="stylesheet">
+</head>
+
+<body>
+<div class="botoes">
+<h1>Livraria</h1>
+    <a href="menu.html"><button class="btn btn-secondary">Menu</button></a>
+    <a href="crudBooks.html"><button class="btn btn-secondary">Crud Books</button></a>
+    <a href="crudCategoriesPublishers.html"><button class="btn btn-secondary">Crud Categories</button></a>
+    <a href="crudCategoriesPublishers.html"><button class="btn btn-secondary">Crud Publishers</button></a>
+</div>
+
+<section id="section2"></section>
+<div class="section2">
+
+
+    <div class="table-responsive">
+        <h2>Crud States</h2>
+        <button type="button" class="btn btn-secondary" onclick="showStatesCreateBox()">Create</button>
+    <table class="tableCategories">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>   
+                <th scope="col">province</th>   
+            </tr>
+        </thead>
+        <tbody id="mytableStates">
+            <tr>
+                <th scope="row" colspan="5">Loading...</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="table-responsive">
+    <h2>Crud Cities</h2>
+    <div><button type="button" class="btn btn-secondary" onclick="showCityCreateBox()">Create</button></div>
+    <table class="tableCities">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>   
+                <th scope="col">State</th>   
+            </tr>
+        </thead>
+        <tbody id="mytableCities">
+            <tr>
+                <th scope="row" colspan="5">Loading...</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/crudCities.js"></script>
+<script src="js/crudStates.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+</body>
+
+</html>

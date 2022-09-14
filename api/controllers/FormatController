@@ -1,0 +1,35 @@
+const { Op } = require('sequelize');
+const FormatModel = require('../models/format');
+
+class FormatController {
+  
+  index = async (req, res, next) => {
+    res.json(await FormatModel.findAll());
+  }
+
+  create = async (req,res,next) => {
+    try {
+        const data = await this.validateData(req.body);
+        const user = await FormatModel.create(data);
+        res.json(user);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+  }
+
+
+
+validateData = async (data, id) => {
+  const attributes = ['description'];
+  const user = {};
+  for (const attribute of attributes) {
+    if (! data[attribute]){
+      throw new Error(`The attribute "${attribute}" is required.`);
+    }
+    user[attribute] = data[attribute];
+  }  
+  return user;
+  }
+}
+
+module.exports = new FormatController;

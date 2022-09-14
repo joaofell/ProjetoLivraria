@@ -1,3 +1,4 @@
+const ENDPOINT = "http://localhost:3000";
 
 
 const loadTablePublisher = () => {
@@ -6,7 +7,6 @@ const loadTablePublisher = () => {
             if (response.status === 200) {
                 const data = response.data;
                 var trHTML = '';
-                console.log(data)
                 data.forEach(element => {
                     trHTML += '<tr>';
                     trHTML += '<td>' + element.id + '</td>';

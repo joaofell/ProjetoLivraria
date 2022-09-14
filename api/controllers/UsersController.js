@@ -15,11 +15,16 @@ class UserController {
         if (params.name) {
           where.name = {
             [Op.iLike]:`%${params.name}%`
-          }
+          };
         }
         if (params.email) {
           where.email = {
             [Op.iLike]:`%${params.email}%`
+          }
+        }
+        if (params.password) {
+          where.password = {
+            [Op.iLike]:`${params.password}`
           }
         }
         if (params.min_age) {

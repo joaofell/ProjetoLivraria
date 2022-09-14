@@ -6,6 +6,7 @@ const cities = require('./cities.js');
 const Publisher = require('./publishers.js');
 const Category = require('./categories.js');
 const Book = require('./books.js');
+const Format = require('./format.js');
 
 router.use(cors());
 
@@ -15,5 +16,6 @@ router.use(cities);
 router.use(Publisher);
 router.use(Category);
 router.use(Book);
+router.use(Format);
 
 module.exports = router;

@@ -22,7 +22,7 @@ class CategoryController {
   }
 
   show = async (req,res,next) => {
-    const user = await CategoryModel.findByPk(req.params.cityId);
+    const user = await CategoryModel.findByPk(req.params.categoryId);
 res.json(user);
 }
   

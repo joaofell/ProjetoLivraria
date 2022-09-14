@@ -1,5 +1,3 @@
-<!doctype html>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -8,18 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD</title>
-    <link href="crudBook.css" rel="stylesheet">
+    <link href="css/crudBook.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-<link href="crudBooks.js" rel="stylesheet">
+    <link href="js/crudBooks.js" rel="stylesheet">
 </head>
 
 <body>
-<h1>Livraria</h1>
-<a href="menu.html"><button class="btn btn-secondary">Menu</button></a>
-<div class="table-responsive">
-    <h2>Crud Book</h2>
+    <div class="botoes">
+    <h1>Livraria</h1>
+    <a href="menu.html"><button class="btn btn-secondary">Menu</button></a>
+    <a href="crudStatesCities.html"><button class="btn btn-secondary">Crud Cities</button></a>
+    <a href="crudStatesCities.html"><button class="btn btn-secondary">Crud States</button></a>
+    <a href="crudCategoriesPublishers.html"><button class="btn btn-secondary">Crud Categories</button></a>
+    <a href="crudCategoriesPublishers.html"><button class="btn btn-secondary">Crud Publishers</button></a>
+</div>
+    <div class="table-responsive">
+        <h2>Crud Book</h2>
     <button type="button" class="btn btn-secondary" onclick="showBookCreateBox()">Create</button>
+    <input type="text" id="nameParams" placeholder="Nome" name="fname">
+    <select id="select" onclick="select()">
+        <option value="" selected="selected">Selecione uma categoria</option>
+    </select>
+    <button class="btn btn-secondary" onclick="loadTableBook()">Procurar</button>
+    <button type="button" class="btn btn-secondary" onclick="recarregar()">Limpar</button>
+
     <table class="tableBooks">
         <thead>
             <tr>
@@ -30,6 +41,7 @@
                 <th scope="col">Pages</th>
                 <th scope="col">Category</th>
                 <th scope="col">Publisher</th>
+                <th scope="col">Format</th>
             </tr>
         </thead>
         <tbody id="mytableBooks">
@@ -40,104 +52,9 @@
     </table>
 </div>
 
-
-<section id="section1"></section>
-
-<div class="section1">
-
-    <div class="table-responsive">
-        <h2>Crud Category</h2>
-    <button type="button" class="btn btn-secondary" onclick="showCategoryCreateBox()">Create</button>
-    <table class="tableCategories">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Description</th>   
-            </tr>
-        </thead>
-        <tbody id="mytableCategories">
-            <tr>
-                <th scope="row" colspan="5">Loading...</th>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="table-responsive">
-    <h2>Crud Publisher</h2>
-    <button type="button" class="btn btn-secondary" onclick="showPublisherCreateBox()">Create</button>
-    <table class="tableCategories">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>   
-                <th scope="col">City</th>   
-            </tr>
-        </thead>
-        <tbody id="mytablePublisher">
-            <tr>
-                <th scope="row" colspan="5">Loading...</th>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-</div>
-
-
-
-<section id="section2"></section>
-<div class="section2">
-
-
-    <div class="table-responsive">
-        <h2>Crud States</h2>
-        <button type="button" class="btn btn-secondary" onclick="showStatesCreateBox()">Create</button>
-    <table class="tableCategories">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>   
-                <th scope="col">province</th>   
-            </tr>
-        </thead>
-        <tbody id="mytableStates">
-            <tr>
-                <th scope="row" colspan="5">Loading...</th>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-
-<div class="table-responsive">
-    <h2>Crud Cities</h2>
-    <button type="button" class="btn btn-secondary" onclick="showCityCreateBox()">Create</button>
-    <table class="tableCities">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>   
-                <th scope="col">State</th>   
-            </tr>
-        </thead>
-        <tbody id="mytableCities">
-            <tr>
-                <th scope="row" colspan="5">Loading...</th>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-</div>
-
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="crudBooks.js"></script>
-<script src="crudPublishers.js"></script>
-<script src="crudCategories.js"></script>
-<script src="crudCities.js"></script>
-<script src="crudStates.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+<script src="js/crudBooks.js"></script>
+s<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>

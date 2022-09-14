@@ -45,7 +45,7 @@ const categoryCreate = () => {
             Swal.fire(`category ${response.data.description} created`);
             loadTablecategories();
         }, (error) => {
-            Swal.fire(`Error to create book: ${error.response.data.error} `)
+            Swal.fire(`Error to create category: ${error.response.data.error} `)
                 .then(() => {
                     showCategoryCreateBox();
                 })
@@ -61,19 +61,19 @@ const categoryDelete = async (id) => {
     const data = user.data;
     axios.delete(`${ENDPOINT}/categories/` + id)
     .then((response) => {
-        Swal.fire(`Publisher ${data.description} deleted`);
+        Swal.fire(`category ${data.description} deleted`);
         loadTablecategories();
     }, (error) => {
-        Swal.fire(`Error to delete publisher: ${error.response.data.error} `);
+        Swal.fire(`Error to delete category: ${error.response.data.error} `);
         loadTablecategories();
     });
 };
 
 const showCategoryEditBox = async (id) => {
-    const user = await getCategory(id);
+    const user = await getCategories(id);
     const data = user.data;
     Swal.fire({
-        title: 'Edit Book',
+        title: 'Edit category',
         html:
         '<input id="id" type="hidden" value=' + data.id + '>' +
         '<input id="description" class="swal2-input" placeholder="description" value="' + data.description + '">',
@@ -92,10 +92,10 @@ const categoryEdit = () => {
         description: description,
     })
         .then((response) => {
-            Swal.fire(`User ${response.data.name} updated`);
+            Swal.fire(`category ${response.data.description} updated`);
             loadTablecategories();
         }, (error) => {
-            Swal.fire(`Error to update user: ${error.response.data.error} `)
+            Swal.fire(`Error to update category: ${error.response.data.error} `)
                 .then(() => {
                     showCategoryEditBox(id);
                 })

@@ -1,3 +1,6 @@
+.body{
+    font-family: Arial, Helvetica, sans-serif;
+}
 .table-responsive{
     margin-bottom: 50px;
     margin-top: 10px;
@@ -6,7 +9,7 @@
     border-width: 3px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.278);
-    
+    border-radius: 5px;
 }
 .section1{
     display: flex;
@@ -21,8 +24,17 @@
 }
 table{
     margin:10px;
+    text-align: center;
 }
 th{
     padding-left: 20px;
-    padding-right: 80px;
+    padding-right: 45px;
+    padding-left: 45px;
+    border: 1px solid black;
+}
+.botoes{
+    margin-left: 10%;
+}
+tr{
+    border: 1px solid black;
 }

@@ -2,6 +2,7 @@ const { DataTypes, Model } = require('sequelize');
 const db = require('../db');
 const Category = require('./Category.js');
 const Publisher = require('./Publisher.js');
+const Format = require('./Format.js');
 
 
 class Book extends Model { 
@@ -43,6 +44,9 @@ Book.belongsTo(Category);
 
 Publisher.hasMany(Book);
 Book.belongsTo(Publisher);
+
+Format.hasMany(Book);
+Book.belongsTo(Format);
 
 
 

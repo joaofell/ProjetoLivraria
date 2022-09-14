@@ -29,7 +29,7 @@ class PublisherController {
   }
 
   show = async (req,res,next) => {
-    const user = await PublisherModel.findByPk(req.params.publisherId);
+    const user = await PublisherModel.findByPk(req.params.publishersId);
 res.json(user);
   }
 
